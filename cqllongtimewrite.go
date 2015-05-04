@@ -19,7 +19,6 @@ const goruntime_num = 20
 var passwdAuth gocql.PasswordAuthenticator
 
 func main() {
-
 	passwdAuth.Username = "username"
 	passwdAuth.Password = "passwd"
 
@@ -38,22 +37,22 @@ func main() {
 }
 
 func doOnce(ch chan int, i int) {
-  defer func(){
-	   ch <- 1
-  }()
+	defer func(){
+		ch <- 1
+	}()
     
-  var cluster *gocql.ClusterConfig
-  cluster = gocql.NewCluster("192.168.1.68", "192.168.1.67")
-  cluster.Keyspace = "testwrite"
+	var cluster *gocql.ClusterConfig
+	cluster = gocql.NewCluster("192.168.1.68", "192.168.1.67")
+	cluster.Keyspace = "testwrite"
 	cluster.Consistency = gocql.Quorum
 	cluster.Authenticator = passwdAuth
-  cluster.NumConns = 10
+	cluster.NumConns = 10
 
-  session, err := cluster.CreateSession()
-  if err != nil{
-    log.Println(i,"err:",err,"we return")
-    return
-  }
+	session, err := cluster.CreateSession()
+	if err != nil{
+    		log.Println(i,"err:",err,"we return")
+    		return
+  	}
 	defer session.Close()
 	
 	i++
