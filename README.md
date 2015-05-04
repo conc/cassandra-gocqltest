@@ -1,0 +1,2 @@
+# gocqltest
+自己写的golang一些使用cql操作cassandra的例子，cql用起来还蛮有意思的
